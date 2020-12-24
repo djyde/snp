@@ -1,81 +1,47 @@
 package main
 
 import (
-	"bytes"
-	"encoding/json"
+	"flag"
+	"fmt"
 	"io/ioutil"
-	"log"
-	"os"
 	"path/filepath"
-	"strings"
+
+	"github.com/kirsle/configdir"
 )
 
-type Attr struct {
-	Scope       string
-	Description string
-}
-
-type SnippetItem struct {
-	Scope       string   `json:"scope"`
-	Description string   `json:"description"`
-	Body        []string `json:"body"`
-	Prefix      string   `json:"prefix"`
-}
-
-func JSONMarshal(t interface{}) ([]byte, error) {
-	buffer := &bytes.Buffer{}
-	encoder := json.NewEncoder(buffer)
-	encoder.SetEscapeHTML(false)
-	encoder.SetIndent("", "  ")
-	err := encoder.Encode(t)
-	return buffer.Bytes(), err
-}
+// VERSION code
+const VERSION = "v0.1.1"
 
 func main() {
+	// cwd, _ := os.Getwd()
 
-	cwd, _ := os.Getwd()
+	// output path, default is current file
+	// outputPath := flag.String("o", cwd, "Where to output the snippet")
 
-	files, err := ioutil.ReadDir(cwd)
+	shouldPrint := flag.Bool("p", false, "Should print out the json text")
 
-	if err != nil {
-		log.Fatal(err)
+	autoUpdate := flag.Bool("u", false, "Should automatically update snippet file in VS Code")
+
+	flag.Parse()
+
+	// snippetFileFullPath := filepath.Join(*outputPath, "snp.code-snippets")
+
+	// fmt.Println(snippetFileFullPath)
+
+	json := ParseSnpFiles()
+
+	if *shouldPrint {
+		fmt.Println(string(json))
 	}
 
-	snippet := make(map[string]SnippetItem)
+	if *autoUpdate {
+		configPath := configdir.LocalConfig("Code")
 
-	for _, file := range files {
-		if strings.HasSuffix(file.Name(), ".snp") {
+		target := filepath.Join(configPath, "User", "snippets", "snp.code-snippets")
 
-			attr := Attr{}
+		fmt.Println(target)
 
-			filePath := filepath.Join(cwd, file.Name())
-			rawContent, readFileErr := ioutil.ReadFile(filePath)
-			if readFileErr != nil {
-				log.Fatal(err)
-			}
-
-			prefix := strings.TrimSuffix(file.Name(), filepath.Ext(filePath))
-
-			content, parseFmErr := Unmarshal(rawContent, &attr)
-			if parseFmErr != nil {
-				log.Fatal(parseFmErr)
-			}
-
-			stringContent := strings.TrimRight(strings.TrimLeft(string(content), "\n"), "\n")
-
-			body := strings.Split(stringContent, "\n")
-
-			item := SnippetItem{attr.Scope, attr.Description, body, prefix}
-
-			snippet[prefix] = item
-		}
+		ioutil.WriteFile(target, json, 0644)
 	}
 
-	json, jsonEncodingErr := JSONMarshal(snippet)
-
-	if jsonEncodingErr != nil {
-		log.Fatal(jsonEncodingErr)
-	}
-
-	ioutil.WriteFile("snp.code-snippets", json, 0644)
 }
