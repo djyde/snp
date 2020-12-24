@@ -1,6 +1,6 @@
 # snp
 
-A VS Code code snippets generator
+[WIP] A VS Code code snippets generator
 
 ## Usage
 
