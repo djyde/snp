@@ -3,7 +3,6 @@ package main
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
 	"log"
 	"os"
@@ -85,8 +84,6 @@ func main() {
 	if jsonEncodingErr != nil {
 		log.Fatal(jsonEncodingErr)
 	}
-
-	fmt.Println(string(json))
 
 	ioutil.WriteFile("snp.code-snippets", json, 0644)
 }
