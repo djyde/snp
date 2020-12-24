@@ -11,31 +11,32 @@ curl -sf https://gobinaries.com/djyde/snp | sh
 ## Usage
 
 ```
-mkdir my-snippets
-cd my-snippets
+$ mkdir my-snippets
+$ cd my-snippets
 
-touch csl.snp
+$ touch csl.snp
 ```
 
 ```js
+// csl.snp
+
 ---
 scope: javascript
 description: console log
 ---
 
-// csl.snp
 console.log($1)
 ```
 
 ```bash
-snp -a
+$ snp -a
 ```
 
 `snp -a` would write a code snippet file to your VS Code snippets folder. Then when you type `csl` in VS Code, the code snippet appear in IntelliSense.
 
 > The program only find the files with `.snp` extension in current working directory.
 
-## Options
+## CLI Options
 
 ```
 $ snp --help
