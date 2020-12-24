@@ -64,14 +64,9 @@ func main() {
 
 			body := strings.Split(stringContent, "\n")
 
-			// fmt.Println(body)
-
 			item := SnippetItem{attr.Scope, attr.Description, body, prefix}
 
 			snippet[prefix] = item
-
-			// fmt.Println(item)
-			// fmt.Println(filepath.Join(cwd, file.Name()))
 		}
 	}
 
