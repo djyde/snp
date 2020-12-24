@@ -47,6 +47,8 @@ $ snp -a
 
 The file name would become the snippet prefix (the trigger text).
 
+For the snippet syntax, you should see the [VS Code Docs](https://code.visualstudio.com/docs/editor/userdefinedsnippets#_snippet-syntax)
+
 ## CLI Options
 
 ```
