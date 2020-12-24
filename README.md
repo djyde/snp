@@ -31,10 +31,10 @@ console.log($1)
 ```
 
 ```bash
-$ snp -a
+$ snp -u
 ```
 
-`snp -a` would write a code snippet file to your VS Code snippets folder. Then when you type `csl` in VS Code, the code snippet appear in IntelliSense.
+`snp -u` would write a code snippet file to your VS Code snippets folder. Then when you type `csl` in VS Code, the code snippet appear in IntelliSense.
 
 > The program only find the files with `.snp` extension in current working directory.
 
