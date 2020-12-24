@@ -75,10 +75,6 @@ func main() {
 		}
 	}
 
-	buf := new(bytes.Buffer)
-	enc := json.NewEncoder(buf)
-	enc.SetEscapeHTML(false)
-
 	json, jsonEncodingErr := JSONMarshal(snippet)
 
 	if jsonEncodingErr != nil {
