@@ -22,7 +22,14 @@ func main() {
 
 	autoUpdate := flag.Bool("u", false, "Should automatically update snippet file in VS Code")
 
+	printVersion := flag.Bool("v", false, "Print version")
+
 	flag.Parse()
+
+	if *printVersion {
+		fmt.Println(VERSION)
+		// os.Exit(0)
+	}
 
 	// snippetFileFullPath := filepath.Join(*outputPath, "snp.code-snippets")
 
