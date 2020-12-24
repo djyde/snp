@@ -36,6 +36,15 @@ $ snp -a
 
 > The program only find the files with `.snp` extension in current working directory.
 
+### The `.snp` file
+
+`.snp` is just a file with [front matter](https://jekyllrb.com/docs/front-matter) and the snippet code. You should pass at least these attributes:
+
+- [scope](https://code.visualstudio.com/docs/editor/userdefinedsnippets#_language-snippet-scope)
+- [description] The description of this snippet
+
+The file name would become the snippet prefix (the trigger text).
+
 ## CLI Options
 
 ```
