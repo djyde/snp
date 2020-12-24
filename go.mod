@@ -1,4 +1,4 @@
-module taonan.lu/go/snp
+module github.com/djyde/snp
 
 go 1.14
 
