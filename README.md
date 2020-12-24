@@ -1,6 +1,6 @@
 # snp
 
-[WIP] A VS Code code snippets generator
+VS Code code snippets generator.
 
 ## Install
 
@@ -9,6 +9,8 @@ curl -sf https://gobinaries.com/djyde/snp | sh
 ```
 
 ## Usage
+
+> See [my snippets](https://github.com/djyde/snippets) as example.
 
 ```
 $ mkdir my-snippets
@@ -41,7 +43,7 @@ $ snp -a
 `.snp` is just a file with [front matter](https://jekyllrb.com/docs/front-matter) and the snippet code. You should pass at least these attributes:
 
 - [scope](https://code.visualstudio.com/docs/editor/userdefinedsnippets#_language-snippet-scope)
-- [description] The description of this snippet
+- **description** The description of this snippet
 
 The file name would become the snippet prefix (the trigger text).
 

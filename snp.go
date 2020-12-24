@@ -11,7 +11,7 @@ import (
 )
 
 // VERSION code
-const VERSION = "v0.1.2"
+const VERSION = "v0.1.3"
 
 func main() {
 	// cwd, _ := os.Getwd()
@@ -43,7 +43,7 @@ func main() {
 
 		target := filepath.Join(configPath, "User", "snippets", "snp.code-snippets")
 
-		fmt.Println(target)
+		fmt.Println("Updated to", target)
 
 		ioutil.WriteFile(target, json, 0644)
 	}
