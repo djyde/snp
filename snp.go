@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"io/ioutil"
+	"os"
 	"path/filepath"
 
 	"github.com/kirsle/configdir"
@@ -28,12 +29,8 @@ func main() {
 
 	if *printVersion {
 		fmt.Println(VERSION)
-		// os.Exit(0)
+		os.Exit(0)
 	}
-
-	// snippetFileFullPath := filepath.Join(*outputPath, "snp.code-snippets")
-
-	// fmt.Println(snippetFileFullPath)
 
 	json := ParseSnpFiles()
 

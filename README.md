@@ -31,7 +31,29 @@ console.log($1)
 snp -a
 ```
 
-`snp -a` would write a code snippet file to your VS Code snippets folder. Then when you type `csl` in VS Code, the code snippet will show up.
+`snp -a` would write a code snippet file to your VS Code snippets folder. Then when you type `csl` in VS Code, the code snippet appear in IntelliSense.
+
+> The program only find the files with `.snp` extension in current working directory.
+
+## Options
+
+```
+$ snp --help
+
+Usage of snp:
+  -p	Should print out the json text
+  -u	Should automatically update snippet file in VS Code
+  -v	Print version
+
+```
+
+### -p
+
+Instead of updating the file on VS Code snippets folder, you could use `-p` to just print out the JSON and then use this output to do what you want, like output to a file:
+
+```
+snp -p > my-snippet.code-snippets
+```
 
 ## Build
 
