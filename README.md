@@ -8,6 +8,8 @@ VS Code code snippets generator.
 curl -sf https://gobinaries.com/djyde/snp | sh
 ```
 
+For Windows users, please download it in [release](https://github.com/djyde/snp/releases) page.
+
 ## Usage
 
 > See [my snippets](https://github.com/djyde/snippets) as example.

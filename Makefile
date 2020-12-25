@@ -72,5 +72,7 @@ all-arch: $(PLATFORM_LIST) $(WINDOWS_ARCH_LIST)
 
 releases: $(gz_releases) $(zip_releases)
 
+windows: $(zip_releases)
+
 clean:
 	rm $(BINDIR)/*
