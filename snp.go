@@ -11,7 +11,7 @@ import (
 )
 
 // VERSION code
-const VERSION = "v0.1.3"
+const VERSION = "v0.2.0"
 
 func main() {
 	// cwd, _ := os.Getwd()
