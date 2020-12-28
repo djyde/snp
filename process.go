@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+	"path"
 	"path/filepath"
 	"strings"
 )
@@ -35,26 +36,22 @@ func jsonMarshal(t interface{}) ([]byte, error) {
 func ParseSnpFiles() []byte {
 	cwd, _ := os.Getwd()
 
-	files, err := ioutil.ReadDir(cwd)
-
-	if err != nil {
-		log.Fatal(err)
-	}
-
 	snippet := make(map[string]snippetItem)
-
-	for _, file := range files {
-		if strings.HasSuffix(file.Name(), ".snp") {
+	err := filepath.Walk(cwd, func(filePath string, info os.FileInfo, err error) error {
+		if err != nil {
+			return err
+		}
+		if strings.HasSuffix(filePath, ".snp") {
 
 			attribute := attr{}
 
-			filePath := filepath.Join(cwd, file.Name())
 			rawContent, readFileErr := ioutil.ReadFile(filePath)
 			if readFileErr != nil {
 				log.Fatal(err)
 			}
 
-			prefix := strings.TrimSuffix(file.Name(), filepath.Ext(filePath))
+			filename := path.Base(filePath)
+			prefix := filename[0 : len(filename)-4]
 
 			content, parseFmErr := Unmarshal(rawContent, &attribute)
 			if parseFmErr != nil {
@@ -69,6 +66,11 @@ func ParseSnpFiles() []byte {
 
 			snippet[prefix] = item
 		}
+		return nil
+	})
+
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	json, jsonEncodingErr := jsonMarshal(snippet)
