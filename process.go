@@ -6,7 +6,6 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
-	"path"
 	"path/filepath"
 	"strings"
 )
@@ -37,20 +36,20 @@ func ParseSnpFiles() []byte {
 	cwd, _ := os.Getwd()
 
 	snippet := make(map[string]snippetItem)
-	err := filepath.Walk(cwd, func(filePath string, info os.FileInfo, err error) error {
+	err := filepath.Walk(cwd, func(fp string, info os.FileInfo, err error) error {
 		if err != nil {
 			return err
 		}
-		if strings.HasSuffix(filePath, ".snp") {
+		if strings.HasSuffix(fp, ".snp") {
 
 			attribute := attr{}
 
-			rawContent, readFileErr := ioutil.ReadFile(filePath)
+			rawContent, readFileErr := ioutil.ReadFile(fp)
 			if readFileErr != nil {
 				log.Fatal(err)
 			}
 
-			filename := path.Base(filePath)
+			filename := filepath.Base(fp)
 			prefix := filename[0 : len(filename)-4]
 
 			content, parseFmErr := Unmarshal(rawContent, &attribute)
